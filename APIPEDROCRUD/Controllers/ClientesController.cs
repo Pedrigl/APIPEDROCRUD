@@ -30,8 +30,8 @@ namespace APIPEDROCRUD.Controllers
 
         public async Task<IActionResult> Post(Cliente cliente)
         {
-            if (cliente.Uf.Length > 2)
-                return BadRequest("A Uf pode ter no máximo 2 caracteres");
+            if (cliente.Uf.Length != 2)
+                return BadRequest("A Uf precisa ter 2 dígitos");
             if (cliente.Cep.Length != 8)
                 return BadRequest("o CEP precisa ter 8 dígitos");
             _context.Add(cliente);
@@ -47,8 +47,8 @@ namespace APIPEDROCRUD.Controllers
             {
                 return BadRequest();
             }
-            if (clientedata.Uf.Length > 2)
-                return BadRequest("A Uf pode ter no máximo 2 caracteres");
+            if (clientedata.Uf.Length != 2)
+                return BadRequest("A Uf precisa ter 2 dígitos");
             if (clientedata.Cep.Length != 8)
                 return BadRequest("o CEP precisa ter 8 dígitos");
 
