@@ -16,11 +16,11 @@ namespace APIPEDROCRUD.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{telefone}")]
 
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(string telefone)
         {
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.Id == id);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.Telefone == telefone);
             if (cliente == null)
                 return NotFound();
             return Ok(cliente);
