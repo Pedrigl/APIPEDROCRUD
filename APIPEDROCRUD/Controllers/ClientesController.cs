@@ -16,12 +16,6 @@ namespace APIPEDROCRUD.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Cliente>> Get()
-        {
-            return await _context.Clientes.ToListAsync();
-        }
-
         [HttpGet("{id}")]
 
         public async Task<IActionResult> Get(int id)
@@ -36,6 +30,8 @@ namespace APIPEDROCRUD.Controllers
 
         public async Task<IActionResult> Post(Cliente cliente)
         {
+            if (cliente.Uf.Length > 2)
+                return BadRequest("A Uf pode ter no máximo 2 caracteres");
             _context.Add(cliente);
             await _context.SaveChangesAsync();
             return Ok();
@@ -43,14 +39,16 @@ namespace APIPEDROCRUD.Controllers
 
         [HttpPut]
 
-        public async Task<IActionResult> Put(Cliente clientedata)
+        public async Task<IActionResult> Put(int Id,Cliente clientedata)
         {
-            if (clientedata == null || clientedata.Id == 0)
+            if (clientedata == null || Id == 0)
             {
                 return BadRequest();
             }
+            if (clientedata.Uf.Length > 2)
+                return BadRequest("A Uf pode ter no máximo 2 caracteres");
 
-            var cliente = await _context.Clientes.FindAsync(clientedata.Id);
+            var cliente = await _context.Clientes.FindAsync(Id);
 
             if (cliente == null)
                 return BadRequest();
@@ -60,6 +58,7 @@ namespace APIPEDROCRUD.Controllers
             cliente.Cidade = clientedata.Cidade;
             cliente.Bairro = clientedata.Bairro;
             cliente.Endereco = clientedata.Endereco;
+            cliente.Uf = clientedata.Uf;
 
             await _context.SaveChangesAsync();
             return Ok();
