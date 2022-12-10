@@ -32,6 +32,8 @@ namespace APIPEDROCRUD.Controllers
         {
             if (cliente.Uf.Length > 2)
                 return BadRequest("A Uf pode ter no máximo 2 caracteres");
+            if (cliente.Cep.Length != 8)
+                return BadRequest("o CEP precisa ter 8 dígitos");
             _context.Add(cliente);
             await _context.SaveChangesAsync();
             return Ok();
@@ -47,6 +49,8 @@ namespace APIPEDROCRUD.Controllers
             }
             if (clientedata.Uf.Length > 2)
                 return BadRequest("A Uf pode ter no máximo 2 caracteres");
+            if (clientedata.Cep.Length != 8)
+                return BadRequest("o CEP precisa ter 8 dígitos");
 
             var cliente = await _context.Clientes.FindAsync(Id);
 
