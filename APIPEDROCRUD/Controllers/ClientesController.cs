@@ -16,7 +16,7 @@ namespace APIPEDROCRUD.Controllers
             _context = context;
         }
 
-        [HttpGet("{telefone}")]
+        [HttpGet("telefone")]
 
         public async Task<IActionResult> Get(string telefone)
         {
