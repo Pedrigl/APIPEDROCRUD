@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APIPEDROCRUD.Models;
+using Newtonsoft.Json;
 
 namespace APIPEDROCRUD.Controllers
 {
@@ -14,6 +15,18 @@ namespace APIPEDROCRUD.Controllers
         public ClientesController(BdcadastroContext context)
         {
             _context = context;
+        }
+
+        [HttpPost("FiltrarJSON")]
+        public IActionResult FiltraMedBeauty(Jsons json)
+        {
+            dynamic jsonParse = JsonConvert.DeserializeObject(json.json);
+
+            List<string> ceps = JsonConvert.DeserializeObject<List<string>>(jsonParse.values);
+
+            List<string> filtrada = ceps.FindAll(x => x == json.cep);
+            return Ok(filtrada);
+
         }
 
         [HttpGet("telefone")]
