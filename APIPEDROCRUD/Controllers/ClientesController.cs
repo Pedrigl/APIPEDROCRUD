@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using APIPEDROCRUD.Models;
-using Newtonsoft.Json;
 
 namespace APIPEDROCRUD.Controllers
 {
@@ -17,29 +15,18 @@ namespace APIPEDROCRUD.Controllers
             _context = context;
         }
 
-        [HttpPost("FiltrarJSON")]
-        public IActionResult FiltraMedBeauty(Jsons json)
-        {
-            dynamic jsonParse = JsonConvert.DeserializeObject(json.json);
 
-            List<string> ceps = JsonConvert.DeserializeObject<List<string>>(jsonParse.values);
-
-            List<string> filtrada = ceps.FindAll(x => x == json.cep);
-            return Ok(filtrada);
-
-        }
-
-        [HttpGet("telefone")]
+        [HttpGet("telefone/{telefone}")]
 
         public async Task<IActionResult> Get(string telefone)
         {
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.Telefone == telefone);
+            var cliente = _context.Clientes.ToArray().Where(m => m.Telefone == telefone);
             if (cliente == null)
                 return NotFound();
             return Ok(cliente);
         }
 
-        [HttpPost]
+        [HttpPost()]
 
         public async Task<IActionResult> Post(Cliente cliente)
         {
@@ -49,10 +36,10 @@ namespace APIPEDROCRUD.Controllers
                 return BadRequest("o CEP precisa ter 8 dígitos");
             _context.Add(cliente);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(cliente);
         }
 
-        [HttpPut]
+        [HttpPut("Id/{Id}")]
 
         public async Task<IActionResult> Put(int Id,Cliente clientedata)
         {
@@ -81,12 +68,12 @@ namespace APIPEDROCRUD.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("Id/{Id}")]
+        public async Task<IActionResult> Delete(int Id)
         {
-            if (id < 1)
+            if (Id < 1)
                 return BadRequest();
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes.FindAsync(Id);
             if (cliente == null)
                 return BadRequest();
             _context.Remove(cliente);
@@ -96,4 +83,5 @@ namespace APIPEDROCRUD.Controllers
         }
         
     }
+
 }

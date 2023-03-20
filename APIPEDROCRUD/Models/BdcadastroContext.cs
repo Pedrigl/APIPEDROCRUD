@@ -20,7 +20,7 @@ public partial class BdcadastroContext : DbContext
         {
             entity.ToTable("CLIENTE");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.Bairro)
                 .HasMaxLength(50)
                 .IsUnicode(false)

@@ -5,11 +5,11 @@ namespace APIPEDROCRUD.Models;
 
 public partial class Cliente
 {
-    public int Id { get; }
+    public int ID { get; }
 
-    public string Nome { get; set; } = null!;
+    public string Nome { get; set; }
 
-    public string? Endereco { get; set; }
+    public string Endereco { get; set; }
 
     public string Cep { get; set; }
 
