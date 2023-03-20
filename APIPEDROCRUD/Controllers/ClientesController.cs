@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using APIPEDROCRUD.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIPEDROCRUD.Controllers
 {
@@ -18,12 +19,12 @@ namespace APIPEDROCRUD.Controllers
 
         [HttpGet("telefone/{telefone}")]
 
-        public async Task<IActionResult> Get(string telefone)
+        public IEnumerable<Cliente> Get(string telefone)
         {
             var cliente = _context.Clientes.ToArray().Where(m => m.Telefone == telefone);
             if (cliente == null)
-                return NotFound();
-            return Ok(cliente);
+                return null;
+            return cliente;
         }
 
         [HttpPost()]
