@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace APIPEDROCRUD.Models;
+namespace APIPEDROCRUD.Models.Cadastro_1;
 
 public partial class Cliente
 {
     public int ID { get; }
 
-    public string Nome { get; set; } = null!;
+    public string Nome { get; set; }
 
     public string Endereco { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Cliente
 
     public string Uf { get; set; }
 
-    public string Telefone { get; set; } = null!;
+    public string Telefone { get; set; }
 }

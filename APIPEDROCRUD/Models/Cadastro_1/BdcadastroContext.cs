@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace APIPEDROCRUD.Models;
+namespace APIPEDROCRUD.Models.Cadastro_1;
 
 public partial class BdcadastroContext : DbContext
 {

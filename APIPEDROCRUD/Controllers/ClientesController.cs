@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using APIPEDROCRUD.Models;
 using Microsoft.EntityFrameworkCore;
+using APIPEDROCRUD.Models.Cadastro_1;
 
 namespace APIPEDROCRUD.Controllers
 {

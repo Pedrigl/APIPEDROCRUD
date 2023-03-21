@@ -1,11 +1,18 @@
 using Microsoft.EntityFrameworkCore;
+using APIPEDROCRUD.Models.Cadastro_1;
 using APIPEDROCRUD.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("BDCadastro");
-builder.Services.AddDbContextPool<BdcadastroContext>(option =>
-option.UseSqlServer(connectionString)
+var connectionString_1 = builder.Configuration.GetConnectionString("BDCadastro");
+var connectionString_2 = builder.Configuration.GetConnectionString("LoginCadastro");
+
+builder.Services.AddDbContext<BdcadastroContext>(option =>
+option.UseSqlServer(connectionString_1)
+);
+
+builder.Services.AddDbContext<LoginContext>(option =>
+option.UseSqlServer(connectionString_2)
 );
 
 // Add services to the container.
