@@ -17,13 +17,14 @@ namespace APIPEDROCRUD.Controllers
         }
 
 
-        [HttpGet("telefone/{telefone}")]
+        [HttpGet()]
 
         public IEnumerable<Cliente> Get(string telefone)
         {
             var cliente = _context.Clientes.ToArray().Where(m => m.Telefone == telefone);
             if (cliente == null)
                 return null;
+
             return cliente;
         }
 
@@ -40,9 +41,9 @@ namespace APIPEDROCRUD.Controllers
             return Ok(cliente);
         }
 
-        [HttpPut("Id/{Id}")]
+        [HttpPut()]
 
-        public async Task<IActionResult> Put(int Id,Cliente clientedata)
+        public async Task<IActionResult> Put(int Id, Cliente clientedata)
         {
             if (clientedata == null || Id == 0)
             {
@@ -53,10 +54,10 @@ namespace APIPEDROCRUD.Controllers
             if (clientedata.Cep.Length != 8)
                 return BadRequest("o CEP precisa ter 8 dígitos");
 
-            var cliente = await _context.Clientes.FindAsync(Id);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.ID == Id);
 
             if (cliente == null)
-                return BadRequest();
+                return NotFound();
             cliente.Nome = clientedata.Nome;
             cliente.Cep = clientedata.Cep;
             cliente.Telefone = clientedata.Telefone;
@@ -66,10 +67,10 @@ namespace APIPEDROCRUD.Controllers
             cliente.Uf = clientedata.Uf;
 
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(cliente);
         }
 
-        [HttpDelete("Id/{Id}")]
+        [HttpDelete()]
         public async Task<IActionResult> Delete(int Id)
         {
             if (Id < 1)
