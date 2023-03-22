@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString_1 = builder.Configuration.GetConnectionString("BDCadastro");
 var connectionString_2 = builder.Configuration.GetConnectionString("LoginCadastro");
 
+
 builder.Services.AddDbContext<BdcadastroContext>(option =>
 option.UseSqlServer(connectionString_1)
 );
