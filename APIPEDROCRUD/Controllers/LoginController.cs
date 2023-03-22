@@ -32,8 +32,8 @@ namespace APIPEDROCRUD.Controllers
         [HttpPost()]
         public async Task<IActionResult> Post(Login login)
         {
-            var check = _Context.Logins.ToArray().Where(l => l.User == login.User);
-            if(check.Count() > 0)
+            var check = await _Context.Logins.FirstOrDefaultAsync(l => l.User == login.User);
+            if(check != null)
             {
                 return BadRequest("Esse usuário já foi escolhido por favor, tente um usuário diferente");
             }
@@ -42,8 +42,13 @@ namespace APIPEDROCRUD.Controllers
             data = System.Security.Cryptography.SHA256.Create().ComputeHash(data);
             string hash = System.Text.Encoding.ASCII.GetString(data);
             login.Password = hash;
+
+            login.LastChange = DateTime.Now;
+
             _Context.Add(login);
+
             await _Context.SaveChangesAsync();
+
             return Ok(login);
 
         }
@@ -75,6 +80,7 @@ namespace APIPEDROCRUD.Controllers
             user.User = LoginPatch.User;
             user.Name = LoginPatch.Name;
             user.Password = hash;
+            user.LastChange = DateTime.Now;
 
             await _Context.SaveChangesAsync();
 

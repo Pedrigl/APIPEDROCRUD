@@ -36,6 +36,10 @@ public partial class LoginContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Password");
+            entity.Property(e => e.LastChange)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("LastChange");
         });
 
         OnModelCreatingPartial(modelBuilder);
