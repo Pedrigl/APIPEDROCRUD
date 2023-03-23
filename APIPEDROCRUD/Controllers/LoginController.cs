@@ -43,8 +43,6 @@ namespace APIPEDROCRUD.Controllers
             string hash = System.Text.Encoding.ASCII.GetString(data);
             login.Password = hash;
 
-            login.LastChange = DateTime.Now;
-
             _Context.Add(login);
 
             await _Context.SaveChangesAsync();
@@ -80,7 +78,6 @@ namespace APIPEDROCRUD.Controllers
             user.User = LoginPatch.User;
             user.Name = LoginPatch.Name;
             user.Password = hash;
-            user.LastChange = DateTime.Now;
 
             await _Context.SaveChangesAsync();
 
