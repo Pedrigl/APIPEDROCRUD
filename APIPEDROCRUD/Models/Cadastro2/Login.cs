@@ -13,6 +13,6 @@ public partial class Login
 
     public string Password { get; set; } = null!;
 
-    public DateTime LastChange { get; internal set; }
+    public DateTime LastChange { get; internal set; } = DateTime.Now;
 
 }
