@@ -1,8 +1,6 @@
 ﻿using APIPEDROCRUD.Models;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 
 namespace APIPEDROCRUD.Controllers
 {
