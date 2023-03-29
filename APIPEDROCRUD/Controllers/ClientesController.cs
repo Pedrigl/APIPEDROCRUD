@@ -32,11 +32,14 @@ namespace APIPEDROCRUD.Controllers
 
         public async Task<IActionResult> Post(Cliente cliente)
         {
+            if (int.Parse(cliente.Telefone.Substring(2)) != 9)
+                return BadRequest("Telefones precisam ter DDD e o primeiro numero tem que ser 9 \r\n Exemplo:xx9xxxxxxxx");
             if (cliente.Uf.Length != 2)
                 return BadRequest("A Uf precisa ter 2 dígitos");
             if (cliente.Cep.Length != 8)
                 return BadRequest("o CEP precisa ter 8 dígitos");
             _context.Add(cliente);
+
             await _context.SaveChangesAsync();
             return Ok(cliente);
         }
@@ -49,6 +52,9 @@ namespace APIPEDROCRUD.Controllers
             {
                 return BadRequest();
             }
+
+            if (int.Parse(clientedata.Telefone.Substring(2)) != 9)
+                return BadRequest("Telefones precisam ter DDD e o primeiro numero tem que ser 9 \r\n Exemplo:xx9xxxxxxxx");
             if (clientedata.Uf.Length != 2)
                 return BadRequest("A Uf precisa ter 2 dígitos");
             if (clientedata.Cep.Length != 8)
