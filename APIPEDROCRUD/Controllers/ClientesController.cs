@@ -16,7 +16,7 @@ namespace APIPEDROCRUD.Controllers
             _context = context;
         }
 
-        [HttpGet()]
+        [HttpGet("all")]
 
         public async Task<List<Cliente>> Get()
         {
