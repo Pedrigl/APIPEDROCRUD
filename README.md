@@ -35,3 +35,5 @@ Do contrário todos os retornos são ou 200 OK ou 400 Bad Request
 
 Esse projeto está disponível para testes em: https://apipedro.azurewebsites.net/swagger/index.html
 
+Nota: por usar um servidor compartilhado, se a api passar por longos períodos sem utilização, poderá ocorrer de o código de retorno 500 ser obtido, pois ele se desativa enquanto não utilizado. Para contornar isso basta fazer a mesma requisição mais uma vez, e ela funcionará perfeitamente.
+
